@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth"></html>
+<html lang="pt-BR" class="scroll-smooth">
 
 <head>
 
@@ -36,24 +36,56 @@ font-family:'Poppins',sans-serif;
 background: linear-gradient(135deg,#BDDDFC,#88BDF2);
 }
 
+/* Bottom Navbar Animation */
+.bottom-nav {
+transform: translateY(100%);
+transition: transform 0.3s ease-in-out;
+}
+
+.bottom-nav.active {
+transform: translateY(0);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+transform: translateX(-100%);
+transition: transform 0.3s ease-in-out;
+}
+
+.mobile-menu.active {
+transform: translateX(0);
+}
+
+/* Overlay */
+.overlay {
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.3s, visibility 0.3s;
+}
+
+.overlay.active {
+opacity: 1;
+visibility: visible;
+}
+
 </style>
 
 </head>
 
-<body class="text-[#384959]">
+<body class="text-[#384959] pb-16 md:pb-0">
 
 <!-- NAVBAR -->
 
 <header class="fixed w-full bg-white shadow z-50">
-  <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
 
     <!-- Logo -->
-    <h1 class="text-2xl font-bold text-[#384959]">
+    <h1 class="text-xl sm:text-2xl font-bold text-[#384959]">
       Interface Studio
     </h1>
 
-    <!-- Menu -->
-    <ul class="flex items-center gap-8 text-gray-700 font-medium">
+    <!-- Menu Desktop -->
+    <ul class="hidden md:flex items-center gap-6 lg:gap-8 text-gray-700 font-medium text-sm lg:text-base">
 
       <li>
         <a href="#inicio" class="hover:text-[#6A89A7] transition">
@@ -88,15 +120,68 @@ background: linear-gradient(135deg,#BDDDFC,#88BDF2);
       <!-- Botão orçamento -->
       <li>
         <a href="#contato"
-        class="bg-[#6A89A7] text-white px-5 py-2 rounded-lg hover:bg-[#384959] transition shadow">
+        class="bg-[#6A89A7] text-white px-4 lg:px-5 py-2 rounded-lg hover:bg-[#384959] transition shadow text-sm lg:text-base">
         Faça seu orçamento
         </a>
       </li>
 
     </ul>
 
+    <!-- Hamburger Button (Mobile) -->
+    <button id="hamburger" class="md:hidden p-2 text-[#384959]" onclick="toggleMenu()">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+
   </nav>
 </header>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-64 bg-white shadow-2xl z-50 md:hidden">
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-xl font-bold text-[#384959]">Menu</h1>
+      <button onclick="toggleMenu()" class="p-2 text-[#384959]">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+    <ul class="space-y-4 text-gray-700 font-medium">
+      <li>
+        <a href="#inicio" onclick="toggleMenu()" class="block py-2 hover:text-[#6A89A7] transition">
+          <i class="fas fa-home w-6"></i> Início
+        </a>
+      </li>
+      <li>
+        <a href="#sobre" onclick="toggleMenu()" class="block py-2 hover:text-[#6A89A7] transition">
+          <i class="fas fa-user w-6"></i> Sobre
+        </a>
+      </li>
+      <li>
+        <a href="#servicos" onclick="toggleMenu()" class="block py-2 hover:text-[#6A89A7] transition">
+          <i class="fas fa-cogs w-6"></i> Serviços
+        </a>
+      </li>
+      <li>
+        <a href="#projetos" onclick="toggleMenu()" class="block py-2 hover:text-[#6A89A7] transition">
+          <i class="fas fa-project-diagram w-6"></i> Projetos
+        </a>
+      </li>
+      <li>
+        <a href="#contato" onclick="toggleMenu()" class="block py-2 hover:text-[#6A89A7] transition">
+          <i class="fas fa-envelope w-6"></i> Contato
+        </a>
+      </li>
+      <li class="pt-4">
+        <a href="#contato" onclick="toggleMenu()"
+        class="block bg-[#6A89A7] text-white px-5 py-3 rounded-lg hover:bg-[#384959] transition text-center">
+        Faça seu orçamento
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay fixed inset-0 bg-black/50 z-40" onclick="toggleMenu()"></div>
 
 <!-- HERO -->
 
@@ -109,41 +194,41 @@ background: linear-gradient(135deg,#BDDDFC,#88BDF2);
 
 
 
-  <div class="absolute inset-0 flex items-center justify-center">
+  <div class="absolute inset-0 flex items-center justify-center overflow-hidden">
 
     <img 
     src="assets/5.jpeg"
-    class="w-[1460px] opacity-15"
+    class="w-[1800px] max-w-none opacity-15"
     style="filter: contrast(1.1) brightness(0.9);">
 
   </div>
 
 
-<section class="hero min-h-screen flex items-center">
+<section class="hero min-h-screen flex items-center pt-16">
 
-<div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-10 items-center">
 
-<div data-aos="fade-right">
+<div data-aos="fade-right" class="text-center md:text-left">
 
-<h1 class="text-5xl md:text-6xl font-bold mb-6">
+<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
 
 Nós somos  
 <span class="text-white">Interface Studio</span>
 
 </h1>
 
-<h2 class="text-2xl mb-6">
+<h2 class="text-lg sm:text-xl md:text-2xl mb-4 md:mb-6">
 <span id="typing"></span>
 </h2>
 
-<p class="mb-8 text-gray-700">
+<p class="mb-6 md:mb-8 text-gray-700 text-sm sm:text-base px-4 md:px-0">
 
 Desenvolvedores focados em criar interfaces modernas e profissionais para web.
 
 </p>
 
 <a href="#projetos"
-class="bg-[#384959] text-white px-6 py-3 rounded-xl hover:scale-105 transition">
+class="inline-block bg-[#384959] text-white px-6 py-3 rounded-xl hover:scale-105 transition">
 
 Ver Projetos
 
@@ -155,7 +240,7 @@ Ver Projetos
 
 <div class="flex justify-center" data-aos="zoom-in">
 
-<div class="swiper w-[350px] md:w-[550px] rounded-3xl shadow-2xl overflow-hidden">
+<div class="swiper w-[280px] sm:w-[320px] md:w-[400px] lg:w-[550px] rounded-3xl shadow-2xl overflow-hidden">
 
 <div class="swiper-wrapper">
 
@@ -191,36 +276,36 @@ Ver Projetos
 
 <!-- SOBRE -->
 
-<section id="sobre" class="py-24 bg-white">
+<section id="sobre" class="py-16 md:py-24 bg-white">
 
-<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
 
 <div data-aos="fade-right">
-<h2 class="text-4xl font-bold text-[#384959] mb-6">
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#384959] mb-4 md:mb-6 text-center md:text-left">
 Quem Somos
 </h2>
 
-<p class="text-gray-600 mb-4 leading-relaxed">
+<p class="text-gray-600 mb-4 leading-relaxed text-sm sm:text-base">
 Somos um grupo de estudantes da UNIP, unidos pelo objetivo de desenvolver soluções digitais e aprimorar nossas habilidades na área de desenvolvimento web. Este portfólio foi criado como parte de um projeto acadêmico, com o propósito de apresentar nossos conhecimentos em design de interface, organização visual, responsividade e construção de aplicações web modernas.
 </p>
 
-<p class="text-gray-600 mb-4 leading-relaxed">
+<p class="text-gray-600 mb-4 leading-relaxed text-sm sm:text-base">
 Nosso foco é explorar boas práticas de desenvolvimento front-end, criando interfaces intuitivas, organizadas e visualmente agradáveis. Durante o desenvolvimento deste projeto, buscamos aplicar conceitos atuais de experiência do usuário (UX), design de interface (UI) e uso de frameworks modernos para construção de layouts responsivos.
 </p>
 
-<p class="text-gray-600 mb-4 leading-relaxed">
+<p class="text-gray-600 mb-4 leading-relaxed text-sm sm:text-base">
 Além de representar uma atividade acadêmica, este portfólio também funciona como um espaço para demonstrar nossa evolução como desenvolvedores e designers, reunindo projetos práticos que refletem nosso aprendizado ao longo do curso.
 </p>
 
 </div>
 <!-- IMAGEM -->
 
-<div data-aos="fade-left">
+<div data-aos="fade-left" class="order-first md:order-last">
 
 <img 
 src="assets/dev-hero.png"
-class="rounded-2xl shadow-xl w-full">
+class="rounded-2xl shadow-xl w-full h-auto max-h-[300px] md:max-h-none object-cover md:object-contain">
 
 </div>
 
@@ -231,38 +316,47 @@ class="rounded-2xl shadow-xl w-full">
 
 <!-- SERVIÇOS -->
 
-<section id="servicos" class="py-20 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-6 text-center">
+<section id="servicos" class="py-12 md:py-20 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
 
-    <h2 class="text-4xl font-bold text-[#384959] mb-12">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#384959] mb-8 md:mb-12">
       Serviços
     </h2>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
 
-      <div class="bg-white p-8 rounded-xl shadow hover:shadow-xl transition">
-        <h3 class="text-xl font-semibold mb-3 text-[#6A89A7]">
+      <div class="bg-white p-6 md:p-8 rounded-xl shadow hover:shadow-xl transition">
+        <div class="text-3xl md:text-4xl text-[#6A89A7] mb-3">
+          <i class="fas fa-globe"></i>
+        </div>
+        <h3 class="text-lg md:text-xl font-semibold mb-3 text-[#6A89A7]">
           Desenvolvimento Web
         </h3>
-        <p class="text-gray-600">
+        <p class="text-gray-600 text-sm md:text-base">
           Criação de sites modernos, rápidos e responsivos para empresas e projetos.
         </p>
       </div>
 
-      <div class="bg-white p-8 rounded-xl shadow hover:shadow-xl transition">
-        <h3 class="text-xl font-semibold mb-3 text-[#6A89A7]">
+      <div class="bg-white p-6 md:p-8 rounded-xl shadow hover:shadow-xl transition">
+        <div class="text-3xl md:text-4xl text-[#6A89A7] mb-3">
+          <i class="fas fa-paint-brush"></i>
+        </div>
+        <h3 class="text-lg md:text-xl font-semibold mb-3 text-[#6A89A7]">
           UI / UX Design
         </h3>
-        <p class="text-gray-600">
+        <p class="text-gray-600 text-sm md:text-base">
           Interfaces modernas focadas em experiência do usuário e organização visual.
         </p>
       </div>
 
-      <div class="bg-white p-8 rounded-xl shadow hover:shadow-xl transition">
-        <h3 class="text-xl font-semibold mb-3 text-[#6A89A7]">
+      <div class="bg-white p-6 md:p-8 rounded-xl shadow hover:shadow-xl transition sm:col-span-2 lg:col-span-1">
+        <div class="text-3xl md:text-4xl text-[#6A89A7] mb-3">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h3 class="text-lg md:text-xl font-semibold mb-3 text-[#6A89A7]">
           Protótipos e Layouts
         </h3>
-        <p class="text-gray-600">
+        <p class="text-gray-600 text-sm md:text-base">
           Desenvolvimento de layouts profissionais para apresentação de sistemas e projetos.
         </p>
       </div>
@@ -273,33 +367,33 @@ class="rounded-2xl shadow-xl w-full">
 
 <!-- PROJETOS -->
 
-<section id="projetos" class="py-24 bg-white">
+<section id="projetos" class="py-16 md:py-24 bg-white">
 
-<div class="max-w-6xl mx-auto px-6">
+<div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-<h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16" data-aos="fade-up">
 Projeto em Destaque
 </h2>
 
-<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
 
 <img src="assets/cafe.jpg"
-class="rounded-2xl shadow-xl"
+class="rounded-2xl shadow-xl w-full h-auto object-cover"
 data-aos="fade-right">
 
-<div data-aos="fade-left">
+<div data-aos="fade-left" class="text-center md:text-left">
 
-<h3 class="text-3xl font-bold mb-4">
+<h3 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4">
 Café Harmonia
 </h3>
 
-<p class="text-gray-600 mb-6">
+<p class="text-gray-600 mb-5 md:mb-6 text-sm md:text-base">
 Website institucional para cafeteria com foco em design moderno e experiência do usuário.
 </p>
 
 <a href="https://romavitordev.github.io/cafeharmoniav2/"
 target="_blank"
-class="bg-[#6A89A7] text-white px-6 py-3 rounded-xl hover:bg-[#384959]">
+class="inline-block bg-[#6A89A7] text-white px-5 md:px-6 py-2 md:py-3 rounded-xl hover:bg-[#384959] text-sm md:text-base">
 Acessar Projeto
 </a>
 
@@ -313,17 +407,17 @@ Acessar Projeto
 
 <!-- CONTATO -->
 
-<section id="contato" class="py-24 bg-[#BDDDFC]">
+<section id="contato" class="py-16 md:py-24 bg-[#BDDDFC]">
 
-<div class="max-w-5xl mx-auto px-6">
+<div class="max-w-5xl mx-auto px-4 sm:px-6">
 
-<div class="text-center mb-12">
+<div class="text-center mb-8 md:mb-12">
 
-<h2 class="text-4xl font-bold text-[#384959] mb-4">
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#384959] mb-3 md:mb-4">
 Solicite um orçamento
 </h2>
 
-<p class="text-gray-700 max-w-2xl mx-auto">
+<p class="text-gray-700 max-w-2xl mx-auto text-sm md:text-base">
 Entre em contato conosco para saber mais sobre nossos projetos ou solicitar um orçamento. 
 Responderemos o mais breve possível.
 </p>
@@ -331,27 +425,27 @@ Responderemos o mais breve possível.
 </div>
 
 
-<div class="grid md:grid-cols-3 gap-8 mb-16">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-16">
 
 <!-- TELEFONE -->
 
 <div data-aos="fade-up"
-class="bg-white p-8 rounded-xl shadow-lg text-center transition transform hover:-translate-y-2 hover:shadow-2xl">
+class="bg-white p-6 md:p-8 rounded-xl shadow-lg text-center transition transform hover:-translate-y-2 hover:shadow-2xl">
 
-<div class="text-4xl text-[#6A89A7] mb-4">
-<i class="fa-solid fa-phone"></i>
+<div class="text-3xl md:text-4xl text-[#6A89A7] mb-3 md:mb-4">
+<i class="fas fa-phone"></i>
 </div>
 
-<h3 class="text-xl font-semibold text-[#384959] mb-2">
+<h3 class="text-base md:text-xl font-semibold text-[#384959] mb-2">
 Telefone / WhatsApp
 </h3>
 
-<p class="text-gray-600 mb-3">
+<p class="text-gray-600 mb-2 md:mb-3 text-sm">
 Fale diretamente com nossa equipe
 </p>
 
 <a href="https://wa.me/5511999999999"
-class="text-[#6A89A7] font-semibold hover:underline">
+class="text-[#6A89A7] font-semibold hover:underline text-sm md:text-base">
 (11) 99999-9999
 </a>
 
@@ -361,22 +455,22 @@ class="text-[#6A89A7] font-semibold hover:underline">
 <!-- EMAIL -->
 
 <div data-aos="fade-up" data-aos-delay="150"
-class="bg-white p-8 rounded-xl shadow-lg text-center transition transform hover:-translate-y-2 hover:shadow-2xl">
+class="bg-white p-6 md:p-8 rounded-xl shadow-lg text-center transition transform hover:-translate-y-2 hover:shadow-2xl">
 
-<div class="text-4xl text-[#6A89A7] mb-4">
-<i class="fa-solid fa-envelope"></i>
+<div class="text-3xl md:text-4xl text-[#6A89A7] mb-3 md:mb-4">
+<i class="fas fa-envelope"></i>
 </div>
 
-<h3 class="text-xl font-semibold text-[#384959] mb-2">
+<h3 class="text-base md:text-xl font-semibold text-[#384959] mb-2">
 Email
 </h3>
 
-<p class="text-gray-600 mb-3">
+<p class="text-gray-600 mb-2 md:mb-3 text-sm">
 Envie uma mensagem para nossa equipe
 </p>
 
 <a href="mailto:contato@interfacestudio.com"
-class="text-[#6A89A7] font-semibold hover:underline">
+class="text-[#6A89A7] font-semibold hover:underline text-sm md:text-base">
 contato@interfacestudio.com
 </a>
 
@@ -386,21 +480,21 @@ contato@interfacestudio.com
 <!-- HORÁRIO -->
 
 <div data-aos="fade-up" data-aos-delay="300"
-class="bg-white p-8 rounded-xl shadow-lg text-center transition transform hover:-translate-y-2 hover:shadow-2xl">
+class="bg-white p-6 md:p-8 rounded-xl shadow-lg text-center transition transform hover:-translate-y-2 hover:shadow-2xl">
 
-<div class="text-4xl text-[#6A89A7] mb-4">
-<i class="fa-solid fa-clock"></i>
+<div class="text-3xl md:text-4xl text-[#6A89A7] mb-3 md:mb-4">
+<i class="fas fa-clock"></i>
 </div>
 
-<h3 class="text-xl font-semibold text-[#384959] mb-2">
+<h3 class="text-base md:text-xl font-semibold text-[#384959] mb-2">
 Horário de Funcionamento
 </h3>
 
-<p class="text-gray-600">
+<p class="text-gray-600 text-sm">
 Segunda a Sexta  
 </p>
 
-<p class="text-[#6A89A7] font-semibold">
+<p class="text-[#6A89A7] font-semibold text-sm md:text-base">
 09:00 – 18:00
 </p>
 
@@ -409,64 +503,64 @@ Segunda a Sexta
 </div>
 
 
-<form class="bg-white shadow-xl rounded-xl p-10 grid md:grid-cols-2 gap-6">
+<form class="bg-white shadow-xl rounded-xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
 
 <!-- Nome -->
 <div class="flex flex-col">
-<label class="mb-2 font-semibold text-gray-700">Nome</label>
+<label class="mb-2 font-semibold text-gray-700 text-sm md:text-base">Nome</label>
 <input 
 type="text"
 placeholder="Digite seu nome"
-class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#6A89A7]"
+class="border border-gray-300 rounded-lg p-3 md:p-4 focus:outline-none focus:ring-2 focus:ring-[#6A89A7] text-sm md:text-base"
 >
 </div>
 
 <!-- Email -->
 <div class="flex flex-col">
-<label class="mb-2 font-semibold text-gray-700">Email</label>
+<label class="mb-2 font-semibold text-gray-700 text-sm md:text-base">Email</label>
 <input 
 type="email"
 placeholder="Digite seu email"
-class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#6A89A7]"
+class="border border-gray-300 rounded-lg p-3 md:p-4 focus:outline-none focus:ring-2 focus:ring-[#6A89A7] text-sm md:text-base"
 >
 </div>
 
 <!-- Telefone -->
 <div class="flex flex-col">
-<label class="mb-2 font-semibold text-gray-700">Telefone</label>
+<label class="mb-2 font-semibold text-gray-700 text-sm md:text-base">Telefone</label>
 <input 
 type="tel"
 placeholder="(11) 99999-9999"
-class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#6A89A7]"
+class="border border-gray-300 rounded-lg p-3 md:p-4 focus:outline-none focus:ring-2 focus:ring-[#6A89A7] text-sm md:text-base"
 >
 </div>
 
 <!-- Assunto -->
 <div class="flex flex-col">
-<label class="mb-2 font-semibold text-gray-700">Assunto</label>
+<label class="mb-2 font-semibold text-gray-700 text-sm md:text-base">Assunto</label>
 <input 
 type="text"
 placeholder="Ex: Criação de site"
-class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#6A89A7]"
+class="border border-gray-300 rounded-lg p-3 md:p-4 focus:outline-none focus:ring-2 focus:ring-[#6A89A7] text-sm md:text-base"
 >
 </div>
 
 <!-- Mensagem -->
 <div class="flex flex-col md:col-span-2">
-<label class="mb-2 font-semibold text-gray-700">Mensagem</label>
+<label class="mb-2 font-semibold text-gray-700 text-sm md:text-base">Mensagem</label>
 <textarea 
-rows="5"
+rows="4" md:rows="5"
 placeholder="Digite sua mensagem..."
-class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#6A89A7]"
+class="border border-gray-300 rounded-lg p-3 md:p-4 focus:outline-none focus:ring-2 focus:ring-[#6A89A7] text-sm md:text-base"
 ></textarea>
 </div>
 
 <!-- Botão -->
-<div class="md:col-span-2 text-center mt-4">
+<div class="md:col-span-2 text-center mt-2 md:mt-4">
 
 <button
 type="submit"
-class="bg-[#6A89A7] text-white px-10 py-3 rounded-lg font-semibold hover:bg-[#384959] transition shadow-lg"
+class="bg-[#6A89A7] text-white px-8 md:px-10 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#384959] transition shadow-lg text-sm md:text-base w-full md:w-auto"
 >
 
 Enviar mensagem
@@ -480,6 +574,32 @@ Enviar mensagem
 </div>
 
 </section>
+
+<!-- BOTTOM NAVIGATION BAR (MOBILE) -->
+<nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50 md:hidden">
+  <div class="flex justify-around items-center py-2">
+    <a href="#inicio" class="flex flex-col items-center p-2 text-[#6A89A7] hover:text-[#384959] transition">
+      <i class="fas fa-home text-lg"></i>
+      <span class="text-[10px] mt-1">Início</span>
+    </a>
+    <a href="#sobre" class="flex flex-col items-center p-2 text-gray-500 hover:text-[#6A89A7] transition">
+      <i class="fas fa-user text-lg"></i>
+      <span class="text-[10px] mt-1">Sobre</span>
+    </a>
+    <a href="#servicos" class="flex flex-col items-center p-2 text-gray-500 hover:text-[#6A89A7] transition">
+      <i class="fas fa-cogs text-lg"></i>
+      <span class="text-[10px] mt-1">Serviços</span>
+    </a>
+    <a href="#projetos" class="flex flex-col items-center p-2 text-gray-500 hover:text-[#6A89A7] transition">
+      <i class="fas fa-project-diagram text-lg"></i>
+      <span class="text-[10px] mt-1">Projetos</span>
+    </a>
+    <a href="#contato" class="flex flex-col items-center p-2 text-gray-500 hover:text-[#6A89A7] transition">
+      <i class="fas fa-envelope text-lg"></i>
+      <span class="text-[10px] mt-1">Contato</span>
+    </a>
+  </div>
+</nav>
 
 <!-- SCRIPTS -->
 
@@ -537,10 +657,78 @@ once:true
 });
 </script>
 
+<script>
+// Mobile Menu Toggle
+function toggleMenu() {
+  const mobileMenu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('overlay');
+  const hamburger = document.getElementById('hamburger');
+  
+  mobileMenu.classList.toggle('active');
+  overlay.classList.toggle('active');
+  
+  if (mobileMenu.classList.contains('active')) {
+    hamburger.innerHTML = '<i class="fas fa-times text-2xl"></i>';
+  } else {
+    hamburger.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+  }
+}
+
+// Bottom Navigation - Show on scroll
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+  const bottomNav = document.querySelector('.bottom-nav');
+  const currentScrollY = window.scrollY;
+  
+  // Show bottom nav when scrolling down, hide when scrolling up
+  if (currentScrollY > 100) {
+    bottomNav.classList.add('active');
+  } else {
+    bottomNav.classList.remove('active');
+  }
+  
+  lastScrollY = currentScrollY;
+});
+
+// Initial show after delay
+setTimeout(() => {
+  document.querySelector('.bottom-nav').classList.add('active');
+}, 1000);
+
+// Highlight current section in bottom nav
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.bottom-nav a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    
+    if (scrollY >= sectionTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+  
+  navItems.forEach(item => {
+    item.classList.remove('text-[#6A89A7]');
+    item.classList.add('text-gray-500');
+    
+    if (item.getAttribute('href') === '#' + current) {
+      item.classList.remove('text-gray-500');
+      item.classList.add('text-[#6A89A7]');
+    }
+  });
+});
+</script>
+
 <button id="btnTopo"
-class="fixed bottom-6 right-6 bg-[#6A89A7] text-white p-3 rounded-full shadow-lg hover:bg-[#384959] transition hidden">
-↑
+class="fixed bottom-20 md:bottom-6 right-4 md:right-6 bg-[#6A89A7] text-white p-3 rounded-full shadow-lg hover:bg-[#384959] transition hidden z-40">
+<i class="fas fa-arrow-up"></i>
 </button>
 
 </body>
 </html>
+
